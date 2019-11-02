@@ -1,0 +1,45 @@
+<h1 class="d-flex justify-content-center">Devour It!</h1>
+
+<h3 class="d-flex justify-content-center">Welcome to Good Burger, home of the good burger, can I take your order?</h3>
+
+<div class="row">
+	<div class="col-md-4 offset-md-2 text-center">
+		<h1 class="green">Burgers to Eat</h1>
+		<ul>
+
+			{{#each burgers}}
+			{{#unless devoured}}
+			<li>
+				<div class="burgerDevour">
+					<p>#{{this.id}}: {{this.burgerName}}
+						<button class="eatBurger" data-id="{{this.id}}">Devour</button>
+				</div>
+				</p>
+
+			</li>
+			{{/unless}}
+			{{/each}}
+		</ul>
+	</div>
+	<div class="col-md-4 text-center">
+		<h1 class="red">Burgers Eaten</h1>
+		<ul>
+			{{#each burgers}}
+			{{#if devoured}}
+			{{!-- {{#each burgers}} --}}
+			<li>
+				<p>#{{this.id}}: {{this.burgerName}}</p>
+
+			</li>
+			{{/if}}
+			{{/each}}
+			{{!-- {{/each}} --}}
+		</ul>
+	</div>
+</div>
+
+<form action="/" method="POST" class="d-flex justify-content-center">
+	<textarea type="text" name="burger"></textarea>
+
+	<button type="submit">Submit</button>
+</form>
