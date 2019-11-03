@@ -2,6 +2,8 @@ var express = require("express");
 var exphbs = require("express-handlebars");
 var mysql = require("mysql");
 
+const connectpass = process.env.CONNECTPASS;
+
 var app = express();
 
 // Set the port of our application
