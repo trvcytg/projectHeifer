@@ -1,20 +1,22 @@
 # projectHeifer
 
-"Gander is an application that provides a survey, scored on your responses, that then sifts through the other users and returns your most recently active top match!"
+"Heifer is an application that provides a place to log and mark off burgers you want to eat."
 
-Provides a user interface to both take the survey as a user and view the saved api, including both a home page and a survey page.
+Provides a user interface to both take in information in the form of strings and then mark them off the list once you've eatten them.
 
 ## How To Run:
 
-    - visit: https://quiet-gorge-61920.herokuapp.com/
-    - Click the take survey button.
-    - Take the survey
-    - Submit your answers
-    - View results!
+    - visit: https://stark-beyond-23377.herokuapp.com/
+    - Type the burger you would like to eat.
+    - Click submit.
+    - View your saved burger(s).
+    - Click the Devour buttons to mark them off your list, moving them to the devoured category.
 
 ## Sole developer: trvcytg
 
 ## NPM Resources Used:
 
     - express
+    - express-handlebars
     - path
+    - mysql
