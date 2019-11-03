@@ -1,6 +1,7 @@
 var express = require("express");
 var exphbs = require("express-handlebars");
 var mysql = require("mysql");
+const orm = require("./config/orm");
 
 const connectpass = process.env.CONNECTPASS;
 
@@ -19,28 +20,8 @@ app.set("view engine", "handlebars");
 
 app.use(express.static("public"));
 
-if (process.env.JAWSDB_URL) {
-  connection = mysql.createConnection(process.env.JAWSDB_URL);
-} else {
-  connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "yourRootPassword",
-    database: "burgers_db"
-  });
-}
-
-connection.connect(function(err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
-
-  console.log("connected as id " + connection.threadId);
-});
-
 // Root get route
+// orm.selectAll(burgers);
 app.get("/", function(req, res) {
   connection.query("SELECT * FROM burgers;", function(err, data) {
     if (err) throw err;
@@ -50,6 +31,7 @@ app.get("/", function(req, res) {
 });
 
 // Post route -> back to home
+// orm.newEntry(burgers, burgerName, req.body.burger);
 app.post("/", function(req, res) {
   connection.query(
     "INSERT INTO burgers (burgerName) VALUES (?)",
@@ -63,6 +45,7 @@ app.post("/", function(req, res) {
 });
 
 //Update burger to devoured
+// orm.updateEnry(burgers, devoured, true, req.params.id)
 app.put("/api/:id", function(req, res) {
   connection.query(
     "UPDATE burgers SET devoured = true WHERE id = ?;",
