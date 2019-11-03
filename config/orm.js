@@ -2,15 +2,15 @@ const connection = require("./connection");
 
 const orm = {
   selectAll: function(tableName) {
-    const query = "SELECT * FROM ??";
+    const query = "SELECT * FROM ??;";
     connection.query(query, [tableName], (error, result) => {
       if (error) throw error;
-
+      result.render("index", { tableName: data });
       console.log(result);
     });
   },
   selectColumn: function(columnName, tableName) {
-    const query = "SELECT ?? FROM ??";
+    const query = "SELECT ?? FROM ??;";
     connection.query(query, [columnName, tableName], (error, result) => {
       if (error) throw error;
 
@@ -18,7 +18,7 @@ const orm = {
     });
   },
   selectWhere: function(columnName, tableName, valueToMatch) {
-    const query = "SELECT * FROM ?? WHERE ?? = ?";
+    const query = "SELECT * FROM ?? WHERE ?? = ?;";
     connection.query(
       query,
       [tableName, columnName, valueToMatch],
@@ -31,7 +31,7 @@ const orm = {
   },
   selectJoin: function(columns, firstTable, secondTable, origin, foreign) {
     const query =
-      "SELECT ? FROM ?? as tOne LEFT JOIN ?? as tTwo ON tOne.? = tTwo.?";
+      "SELECT ? FROM ?? as tOne LEFT JOIN ?? as tTwo ON tOne.? = tTwo.?;";
     connection.query(
       query,
       [columns, firstTable, secondTable, origin, foreign],
@@ -43,12 +43,24 @@ const orm = {
     );
   },
   newEntry: function(tableName, attribute, value) {
-    const query = "INSERT INTO ?? (?) VALUES (?)";
+    const query = "INSERT INTO ?? (?) VALUES (?);";
     connection.query(query, [tableName, attribute, value], (error, result) => {
       if (error) throw error;
 
       console.log(result);
     });
+  },
+  updateEntry: function(tableName, attribute, value, burgerId) {
+    const query = "UPDATE ?? SET ?? = ? WHERE id = ?;";
+    connection.query(
+      query,
+      [tableName, attribute, value, burgerId],
+      (error, result) => {
+        if (error) throw error;
+        result.json(result);
+        console.log(result);
+      }
+    );
   }
 };
 
